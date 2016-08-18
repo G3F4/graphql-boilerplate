@@ -1,6 +1,10 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import schema from './schema';
+import mongoose from 'mongoose';
+import schema from './graphql';
+
+mongoose.Promise = Promise; // http://mongoosejs.com/docs/promises.html
+mongoose.connect('mongodb://localhost/test');
 
 const app = express();
 const listener = app.use('/graphql', graphqlHTTP({ schema, graphiql: true })).listen(3000, () => {
